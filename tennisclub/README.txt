@@ -1,4 +1,7 @@
-This application was made using Spring Initializr, it uses lombok to reduce constructors, getters and setters code, spring web for web requests, spring data JPA for easy communication with a database. It uses a MySQL database, database "tennis_club" was created before using this app. Tables will be generated automatically. Sample data for testing to "court" and "surface" tables were added manually through MySQL Workbench.
+This application was made using Spring Initializr, it uses lombok to reduce constructors and getters and setters code, 
+spring web for web requests, spring data JPA for easy communication with a database. It uses a MySQL database, 
+database "tennis_club" was created before using this app. Tables will be generated automatically. 
+Sample data for testing to "court" and "surface" tables were added manually through MySQL Workbench.
 
 REST endpoints:
 
