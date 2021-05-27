@@ -1,20 +1,26 @@
 REST endpoints:
 
 @Get
-courts
+tennis_club/courts
 
 @Get
-reservations/court_id={court_id}
+tennis_club/reservations/court_id={court_id}
 
 @Get
-reservations/phone_number={phone_number}
+tennis_club/reservations/phone_number={phone_number}
 
 @Post
-new_reservation
+tennis_club/new_reservation
 
+POST request in JSON format should look like this:
 {
-	"court_id": ?,
-	"doubles": ?,
-	"phone_number": ?,
-	"user_name": ?
+	"courtId": (int),
+	"phoneNumber": (String),
+	"userName": (String),
+	"playingDoubles": (boolean),
+	"date": (Date in "YYYY-MM-DD" format),
+	"time": (Time in "hh:mm:ss" format),
+	"timeInterval": (int)
 }
+
+- timeInterval represents minutes (for how long will the reservation take place)
