@@ -36,18 +36,42 @@ public class TennisclubService {
         this.surfaceRepository = surfaceRepository;
     }
 
+    /**
+     * Returns list of courts with their corresponding reservations.
+     *
+     * @return list of Court instances
+     */
     public List<Court> getAllCourts() {
         return courtRepository.findAll();
     }
 
+    /**
+     * Returns list of reservations with input phoneNumber same as theirs.
+     *
+     * @param phoneNumber input String to match with reservations phoneNumber
+     * @return list of corresponding reservations, may be empty
+     */
     public List<Reservation> getReservationsByPhoneNumber(String phoneNumber) {
         return reservationRepository.findReservationsByPhoneNumber(phoneNumber);
     }
 
+    /**
+     * Returns list of reservations with court_id in database same as input courtId.
+     *
+     * @param courtId input String to match with reservations court_id
+     * @return list of corresponding reservations, may be empty
+     */
     public List<Reservation> getReservationsByCourtId(int courtId) {
         return reservationRepository.findReservationsByCourtId(courtId);
     }
 
+    /**
+     * Creates new reservation, returns the price of the new reservation,
+     * if creation was successful.
+     *
+     * @param input input data class
+     * @return -1 on fail, price of the reservation otherwise
+     */
     public double createNewReservation(ReservationRawInput input) {
         Court court = getCourtById(input.getCourtId());
         if (court == null) {
@@ -76,11 +100,8 @@ public class TennisclubService {
     }
 
     private boolean inputReservationColliding(Court court, Date inputDate, Time inputTime, int timeInterval) {
-        System.out.println(court.getId());
-        System.out.println("reservationsWithTheSameDate and CourtId:");
         List<Reservation> potentialCollidingReservations =
                 reservationRepository.findReservationsByDateAndCourtId(court.getId(), inputDate);
-        System.out.println(potentialCollidingReservations);
         for (Reservation reservation: potentialCollidingReservations) {
             if (isTimeCollision(reservation.getTime().toLocalTime(), inputTime.toLocalTime(),
                     reservation.getTimeInterval(), timeInterval)) {
@@ -88,7 +109,6 @@ public class TennisclubService {
                 return true;
             }
         }
-        System.out.println("returning true, no reservations colliding");
         return false;
     }
 
